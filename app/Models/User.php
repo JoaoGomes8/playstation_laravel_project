@@ -18,10 +18,13 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    public const TYPE_ADMIN = 1;
     protected $fillable = [
         'name',
         'email',
         'password',
+        'user_type', // Permitir guardar o tipo de utilizador
     ];
 
     /**

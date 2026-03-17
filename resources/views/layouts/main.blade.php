@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayStation CRM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
@@ -23,8 +25,19 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Registo</a></li>
+                    @auth
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.index') }}">Dashboard</a></li>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn nav-link border-0 bg-transparent">Sair</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registo</a></li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -36,4 +49,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
