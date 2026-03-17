@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Studio;
 use Illuminate\Http\Request;
 
 class UtilController extends Controller
 {
     public function home()
     {
-        return view('utils.home');
+        $studios = Studio::all();
+        return view('utils.home', compact('studios'));
     }
 
 

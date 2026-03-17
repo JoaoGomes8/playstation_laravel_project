@@ -2,17 +2,49 @@
 
 @section('content')
     <div class="row mb-4">
-        <div class="col-12">
+        <div class="col-md-8">
             <h1 class="display-5 fw-bold">Estúdios PlayStation</h1>
-            <p class="lead">Explora os jogos dos teus estúdios favoritos.</p>
+            <p class="lead">Explora os estúdios que definem gerações de jogos.</p>
         </div>
+        @auth
+            @if(Auth::user()->user_type == \App\Models\User::TYPE_ADMIN)
+                <div class="col-md-4 text-md-end align-self-center">
+                    <a href="{{ route('studios.create') }}" class="btn btn-success">+ Novo Estúdio</a>
+                </div>
+            @endif
+        @endauth
     </div>
 
+    <hr>
+
     <div class="row">
-        <div class="col-12">
-            <div class="alert alert-info" role="alert">
-                A listagem de estúdios vinda da base de dados vai aparecer aqui!
+        @forelse($studios as $studio)
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    {{-- Verificamos se existe imagem, senão pomos um placeholder --}}
+                    @if($studio->logo_path)
+                        <img src="{{ asset('storage/' . $studio->logo_path) }}" class="card-img-top p-3" alt="{{ $studio->name }}" style="height: 150px; object-fit: contain;">
+                    @else
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                            <span class="text-muted">Sem Logo</span>
+                        </div>
+                    @endif
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">{{ $studio->name }}</h5>
+                        <p class="card-text small text-muted">
+                            {{ $studio->games()->count() }} Jogos Registados
+                        </p>
+                        <a href="#" class="btn btn-outline-dark btn-sm">Ver Jogos</a>
+                    </div>
+                </div>
             </div>
-        </div>
+        @empty
+            <div class="col-12">
+                <div class="alert alert-warning text-center">
+                    Ainda não existem estúdios registados.
+                </div>
+            </div>
+        @endforelse
     </div>
 @endsection
