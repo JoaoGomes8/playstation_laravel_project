@@ -21,13 +21,10 @@
         @forelse($studios as $studio)
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm border-0">
-                    {{-- Verificamos se existe imagem, senão pomos um placeholder --}}
                     @if($studio->logo_path)
-                        <img src="{{ asset('storage/' . $studio->logo_path) }}" class="card-img-top p-3" alt="{{ $studio->name }}" style="height: 150px; object-fit: contain;">
+                        <img src="{{ asset('storage/' . $studio->logo_path) }}" class="card-img-top p-3" alt="{{ $studio->name }}" style="height: 200px; object-fit: contain;">
                     @else
-                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
-                            <span class="text-muted">Sem Logo</span>
-                        </div>
+                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top p-3" alt="Sem Logo" style="height: 200px; object-fit: contain;">
                     @endif
 
                     <div class="card-body text-center">
@@ -35,7 +32,7 @@
                         <p class="card-text small text-muted">
                             {{ $studio->games()->count() }} Jogos Registados
                         </p>
-                        <a href="#" class="btn btn-outline-dark btn-sm">Ver Jogos</a>
+                        <a href="{{ route('studios.show', $studio->id) }}" class="btn btn-outline-dark btn-sm">Ver Jogos</a>
                     </div>
                 </div>
             </div>

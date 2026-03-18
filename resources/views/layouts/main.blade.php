@@ -43,7 +43,17 @@
         </div>
     </nav>
 
+
+
     <main class="container mt-5">
+        <div class="container mt-4">
+    @if(session('message'))
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+</div>
         @yield('content')
     </main>
 
