@@ -64,18 +64,22 @@
                         </p>
                     </div>
 
-                    {{-- Botões de Ação (Apenas para Admin) --}}
                     @auth
-                        @if(Auth::user()->user_type == \App\Models\User::TYPE_ADMIN)
-                            <div class="card-footer bg-transparent border-0 text-center pb-3">
-                                <a href="{{ route('games.edit', $game->id) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <div class="card-footer bg-transparent border-0 text-center pb-3">
+
+                            {{-- Qualquer pessoa autenticada vê o botão Editar --}}
+                            <a href="{{ route('games.edit', $game->id) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+
+                            {{-- APENAS os Administradores veem o botão Apagar --}}
+                            @if(Auth::user()->user_type == \App\Models\User::TYPE_ADMIN)
                                 <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Tens a certeza que queres apagar este jogo?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
                                 </form>
-                            </div>
-                        @endif
+                            @endif
+
+                        </div>
                     @endauth
                 </div>
             </div>

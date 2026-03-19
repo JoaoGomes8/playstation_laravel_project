@@ -81,9 +81,7 @@ class GameController extends Controller
     public function edit(string $id)
     {
 
-        if (Auth::user()->user_type != \App\Models\User::TYPE_ADMIN) {
-            return redirect()->route('utils.home')->with('message', 'Acesso Negado!');
-        }
+
 
         $game = Game::findOrFail($id);
         $studios = Studio::all();
@@ -97,9 +95,7 @@ class GameController extends Controller
     public function update(Request $request, string $id)
     {
 
-        if (Auth::user()->user_type != \App\Models\User::TYPE_ADMIN) {
-            return redirect()->route('utils.home')->with('message', 'Acesso Negado!');
-        }
+
 
         $game = Game::findOrFail($id);
 
