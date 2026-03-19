@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            GameSeeder::class,
         ]);
-
         User::factory()->count(50)->create();
     }
 }

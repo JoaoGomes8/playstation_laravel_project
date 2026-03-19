@@ -10,7 +10,7 @@ class Game extends Model
         'name',
         'cover_path',
         'release_date',
-        'studio_id', // Chave estrangeira
+        'studio_id',
     ];
 
     public function studio()

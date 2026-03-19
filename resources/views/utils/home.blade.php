@@ -15,6 +15,20 @@
         @endauth
     </div>
 
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form action="{{ route('utils.home') }}" method="GET">
+                <div class="input-group shadow-sm">
+                    <input type="text" name="search" class="form-control" placeholder="Procurar por nome do estúdio..." value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+
+                    @if(request('search'))
+                        <a href="{{ route('utils.home') }}" class="btn btn-outline-danger">Limpar</a>
+                    @endif
+                </div>
+            </form>
+        </div>
+    </div>
     <hr>
 
     <div class="row">
@@ -43,5 +57,9 @@
                 </div>
             </div>
         @endforelse
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        {{ $studios->links() }}
     </div>
 @endsection

@@ -63,7 +63,10 @@ class StudioController extends Controller
     {
         $studio = Studio::findOrFail($id);
 
-        return view('studios.show', compact('studio'));
+
+        $games = $studio->games()->paginate(4);
+
+        return view('studios.show', compact('studio', 'games'));
     }
 
     /**

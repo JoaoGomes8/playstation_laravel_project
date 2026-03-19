@@ -24,7 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_type', // Permitir guardar o tipo de utilizador
+        'user_type',
     ];
 
     /**
